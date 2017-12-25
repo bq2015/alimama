@@ -15,8 +15,8 @@ class Spider(object):
     def __init__(self):
 
         chrome_options = webdriver.ChromeOptions()
-        #chrome_options.add_argument('--headless')
-        #chrome_options.add_argument('--disable-gpu')
+        # chrome_options.add_argument('--headless')
+        # chrome_options.add_argument('--disable-gpu')
 
         self.web = webdriver.Chrome(chrome_options=chrome_options, )
         self.headers = {
@@ -108,11 +108,11 @@ class Spider(object):
         else:
             return 'no match item'
 
-    def get_host_product(self, orimemberId ,shop_name):
+    def get_host_product(self, orimemberId, shop_name):
         """ get hot product by orimemberid """
         t = int(time.time() * 1000)
         url = f'https://pub.alimama.com/shopdetail/hotProducts.json?sortField=_totalnum&oriMemberId={orimemberId}&t={t}&pvid=&_tb_token_={self.token}&_input_charset=utf-8'
-        content= self.refresh(url)
+        content = self.refresh(url)
         content = content[121:-20]
         rj = json.loads(content)
         print(f' get_host_product  {shop_name}: {orimemberId}  {rj["ok"]}  {len(rj["data"]["pagelist"])} \n {url}')
@@ -124,49 +124,49 @@ class Spider(object):
     # https://pub.alimama.com/shopsearch/shopList.json?spm=a2320.7388781.a214tr8.d006.12b82560OMX8yq&q=sdf&toPage=1&perPagesize=40&t=1514189329858&pvid=51_218.17.158.52_3072_1514189325299&_tb_token_=33931586e65ea&_input_charset=utf-8
 
     # {
-	# 			'address' : None,
-	# 			'status' : None,
-	# 			'memberID' : 13498885,
-	# 			'oriMemberId' : 263817957,
-	# 			'shopType' : 2,
-	# 			'userTag' : 0,
-	# 			'shopTitle' : '韩都衣舍旗舰店',
-	# 			'pictUrl' : '//img.alicdn.com/shop-logo/63/a7/TB1cOF2JXXXXXbfaXXXSutbFXXX.jpg',
-	# 			'coupon' : '0',
-	# 			'minCommissionRate' : None,
-	# 			'maxCommissionRate' : None,
-	# 			'updateTime' : None,
-	# 			'extNick' : '韩都衣舍旗舰店',
-	# 			'sellerSum' : 0,
-	# 			'promotedType' : None,
-	# 			'starts' : None,
-	# 			'shopUrl' : 'http : //shop58501945.taobao.com/',
-	# 			'shopCommissionRate' : 912,
-	# 			'cpashop' : '0',
-	# 			'shopKeeperCardURL' : None,
-	# 			'epcUpdateTime' : None,
-	# 			'exLevel' : None,
-	# 			'sortRank' : None,
-	# 			'exSysType' : None,
-	# 			'isJoinedCps' : None,
-	# 			'shopCatID' : 14,
-	# 			'shopCatName' : '女装/流行女装',
-	# 			'shopEpc' : None,
-	# 			'shopAuctionCount' : 2546,
-	# 			'totalAction' : 324198,
-	# 			'rankIcon' : '&lt;imgsrc="//img.alicdn.com/newrank/s_crown_5.gif"/&gt;',
-	# 			'rptCpsSh30dDTO' : None,
-	# 			'bonusCouponDTO' : None,
-	# 			'sellerEventDTO' : None,
-	# 			'bonus' : '0',
-	# 			'sellerevent' : '0'
-	# 		},
+        # 			'address' : None,
+        # 			'status' : None,
+        # 			'memberID' : 13498885,
+        # 			'oriMemberId' : 263817957,
+        # 			'shopType' : 2,
+        # 			'userTag' : 0,
+        # 			'shopTitle' : '韩都衣舍旗舰店',
+        # 			'pictUrl' : '//img.alicdn.com/shop-logo/63/a7/TB1cOF2JXXXXXbfaXXXSutbFXXX.jpg',
+        # 			'coupon' : '0',
+        # 			'minCommissionRate' : None,
+        # 			'maxCommissionRate' : None,
+        # 			'updateTime' : None,
+        # 			'extNick' : '韩都衣舍旗舰店',
+        # 			'sellerSum' : 0,
+        # 			'promotedType' : None,
+        # 			'starts' : None,
+        # 			'shopUrl' : 'http : //shop58501945.taobao.com/',
+        # 			'shopCommissionRate' : 912,
+        # 			'cpashop' : '0',
+        # 			'shopKeeperCardURL' : None,
+        # 			'epcUpdateTime' : None,
+        # 			'exLevel' : None,
+        # 			'sortRank' : None,
+        # 			'exSysType' : None,
+        # 			'isJoinedCps' : None,
+        # 			'shopCatID' : 14,
+        # 			'shopCatName' : '女装/流行女装',
+        # 			'shopEpc' : None,
+        # 			'shopAuctionCount' : 2546,
+        # 			'totalAction' : 324198,
+        # 			'rankIcon' : '&lt;imgsrc="//img.alicdn.com/newrank/s_crown_5.gif"/&gt;',
+        # 			'rptCpsSh30dDTO' : None,
+        # 			'bonusCouponDTO' : None,
+        # 			'sellerEventDTO' : None,
+        # 			'bonus' : '0',
+        # 			'sellerevent' : '0'
+        # 		},
     def get_list_shops(self, keywords, page_size=10):
         """ get product list by keywords """
         t = int(time.time() * 1000)
         url = f'https://pub.alimama.com/shopsearch/shopList.json?q={keywords}&toPage=1&perPagesize={page_size}&t={t}&pvid=&_tb_token_={self.token}&_input_charset=utf-8'
         content = self.refresh(url)
-        content =  content[121:-20]
+        content = content[121:-20]
         rj = json.loads(content)
         print(f' get_list_shops  {keywords} {rj["ok"]}  {len(rj["data"]["pagelist"])}')
         if len(rj['data']['pagelist']) > 0:
@@ -270,19 +270,22 @@ if __name__ == '__main__':
     #     print(tk_result)
     #     print('=' * 20)
 
-
     ###
 
-    shop_keywords = '韩都衣舍' 
+    shop_keywords = '韩都衣舍'
     print(f'using shop keywords {shop_keywords}')
+
     shop_list = sp.get_list_shops(shop_keywords,  page_size=10)
     shop_first = shop_list[0]
 
     orimemberId = shop_first['oriMemberId']
     shop_name = shop_first['extNick']
     shop_url = shop_first['shopUrl']
-    product_lists = sp.get_host_product(orimemberId, shop_name + ' '+ shop_url)
+
+    product_lists = sp.get_host_product(
+        orimemberId, shop_name + ' ' + shop_url)
     product_lists = product_lists[:3]
+
     for i, product in enumerate(product_lists):
         print('=' * 20, i)
         tk_result = sp.get_tk_link(product['auctionId'])
