@@ -15,8 +15,8 @@ class Spider(object):
     def __init__(self):
 
         chrome_options = webdriver.ChromeOptions()
-        # chrome_options.add_argument('--headless')
-        # chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--disable-gpu')
 
         self.web = webdriver.Chrome(chrome_options=chrome_options, )
         self.headers = {
@@ -291,3 +291,5 @@ if __name__ == '__main__':
         tk_result = sp.get_tk_link(product['auctionId'])
         print(tk_result)
         print('=' * 20)
+
+    sp.web.quit()
