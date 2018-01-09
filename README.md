@@ -2,6 +2,8 @@
 
 自动登录阿里妈妈，采集淘宝客商品推广信息
 
+> 搜索商品，获取推广码
+> 搜索店铺，获取热销单品，获取推广码
 
 ### pip
 
@@ -21,4 +23,10 @@
 
 
  ```
- 
+###
+
+> 隐藏浏览器， 隐藏执行
+```javascript
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--disable-gpu') 
+```
